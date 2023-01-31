@@ -1,6 +1,6 @@
 package com.estudo.megasema.service;
 
-import com.estudo.megasema.dto.jogos.JogoAleatorio;
+import com.estudo.megasema.dto.jogos.JogoAleatorioDto;
 import com.estudo.megasema.dto.jogos.JogosDto;
 import com.estudo.megasema.model.Jogos;
 import com.estudo.megasema.repository.JogosRepository;
@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -25,8 +24,8 @@ public class JogosService {
 
     private final JogosRepository jogosRepository;
 
-    public JogoAleatorio gerarNumeroAleatorio() {
-        JogoAleatorio jogoAleatorio = new JogoAleatorio();
+    public JogoAleatorioDto gerarNumeroAleatorio() {
+        JogoAleatorioDto jogoAleatorio = new JogoAleatorioDto();
         String[] numeros = new String[6];
         Random gerador = new Random();
         int numeroAleatorio;
