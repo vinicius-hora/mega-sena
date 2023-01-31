@@ -1,0 +1,19 @@
+
+# configuração de banco
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+---
+#jpa
+spring:
+  jpa:
+  show-sql: true
+  properties:
+    hibernate:
+      format_sql: true
+      ddl-auto: create

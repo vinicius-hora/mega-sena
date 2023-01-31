@@ -1,0 +1,13 @@
+server:
+  port: 4001
+spring:
+  profiles:
+    active: dev
+---
+#configuração de versionamento
+spring:
+  liquibase:
+    enabled: false
+    change-log:
+      chasspath: db/changelog/db-liquibase.xml
+
