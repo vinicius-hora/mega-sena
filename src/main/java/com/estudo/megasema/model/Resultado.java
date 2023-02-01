@@ -1,12 +1,17 @@
 package com.estudo.megasema.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 @Entity(name = "resultado")
+@Getter
+@Setter
 public class Resultado  implements Serializable {
     private static final long serialVersionUID = 1694435817494160629L;
 
@@ -28,4 +33,16 @@ public class Resultado  implements Serializable {
     private List<String> dezenas;
     @Column(name = "arrecadacaoTotal")
     private BigDecimal arrecadacaoTotal;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Resultado resultado)) return false;
+        return id.equals(resultado.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

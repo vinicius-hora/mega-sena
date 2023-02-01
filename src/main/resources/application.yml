@@ -11,5 +11,27 @@ spring:
     change-log:
       chasspath: db/changelog/db-liquibase.xml
 
+#variaveis de ambiente
 token:
-  api-mega-sena: ${API-MEGASEMA:}
+  api-megasena: ${API_MEGASEMA}
+
+url:
+  api-loteria: ${URL-API-MEGASENA:https://apiloterias.com.br/app/}
+#
+#log FeignClient
+logging.level.com.estudo.megasena.repository.*: DEBUG
+---
+spring:
+  cloud:
+    openfeign:
+      client:
+        config:
+          feignName:
+            encoder: com.estudo.megasema.dto.resultados.ResultadoDto
+            decoder: com.estudo.megasema.dto.resultados.ResultadoDto
+#            contract: com.example.SimpleContract
+#            capabilities:
+#              - com.example.FooCapability
+#              - com.example.BarCapability
+#            queryMapEncoder: com.example.SimpleQueryMapEncoder
+#            micrometer.enabled: false
