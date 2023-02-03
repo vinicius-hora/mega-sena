@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="ms-tb-01" author="Vinicius Bastos">
+        <createTable tableName="RESULTADO">
+            <column autoIncrement="true" name="cd_id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nome" type="VARCHAR(255)">
+            </column>
+            <column name="numero_concurso" type="INTEGER">
+            </column>
+            <column name="data" type="VARCHAR(255)" >
+            </column>
+            <column name="acumulou" type="BOOLEAN" >
+            </column>
+            <column name="valor_acumulado" type="DECIMAL">
+            </column>
+            <column name="dezenas" type="TEXT"/>
+            <column name="arrecadacao_total" type="DECIMAL"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="ms-tb-02" author="Vinicius Bastos">
+        <createTable tableName="JOGOS">
+            <column autoIncrement="true" name="cd_id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nome" type="VARCHAR(255)">
+            </column>
+            <column name="email" type="TEXT">
+            </column>
+            <column name="numeros" type="TEXT" >
+            </column>
+            <column name="codigo_sorteio" type="INTEGER" >
+            </column>
+            <column name="data_do_jogo" type="timestamp">
+            </column>
+            <column name="dezenas" type="TEXT"/>
+            <column name="arrecadacao_total" type="DECIMAL"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
+

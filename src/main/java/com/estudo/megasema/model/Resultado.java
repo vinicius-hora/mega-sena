@@ -9,14 +9,14 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
-@Entity(name = "resultado")
+@Entity(name = "RESULTADO")
 @Getter
 @Setter
 public class Resultado  implements Serializable {
     private static final long serialVersionUID = 1694435817494160629L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
     @Column(name = "nome")

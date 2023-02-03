@@ -12,13 +12,13 @@ import java.util.Objects;
 
 @Getter
 @Setter
-@Entity(name = "jogos")
+@Entity(name = "JOGOS")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Jogos implements Serializable {
     private static final long serialVersionUID = -499581101907843910L;
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
     @Column(name = "nome")
