@@ -16,7 +16,7 @@ public class JogosDto {
     private String nome;
     private String email;
     private List<String> numeros;
-    private Long codigoDeSorteio;
+//    private Long codigoDeSorteio;
     private LocalDateTime dataDoJogo;
 
     private String cidade;
@@ -28,7 +28,6 @@ public class JogosDto {
         dto.setNumeros(jogos.getNumeros());
 //        dto.setEmail(jogos.getEmail());
         dto.setDataDoJogo(jogos.getDataDoJogo());
-        dto.setCodigoDeSorteio(jogos.getCodigoDeSorteio());
         dto.setCidade(jogos.getCidade());
 
         return dto;

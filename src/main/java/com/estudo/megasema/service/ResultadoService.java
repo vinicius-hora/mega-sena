@@ -1,5 +1,6 @@
 package com.estudo.megasema.service;
 
+import com.estudo.megasema.configuration.exception.NumberException;
 import com.estudo.megasema.dto.resultados.GetResuldatoDto;
 import com.estudo.megasema.dto.resultados.ResultadoDto;
 import com.estudo.megasema.model.Resultado;
@@ -24,10 +25,11 @@ import java.util.stream.Collectors;
 @EnableScheduling
 public class ResultadoService {
     private final ResultadoFeingRepository feingRepository;
-    private static final String CRON_GENERATE = "0 0 21 * * 3,6";
+    private static final String CRON_GENERATE = "0 59 20 * * 3,6";
 //    MINUTO = 0 * * * * *
-//    QUARTA E SABADO 21H = "0 0 21 * * 3,6"
+//    QUARTA E SABADO 20:59H = "0 59 20 * * 3,6"
     private final ResultadoRepository resultadoRepository;
+    private final JogosService jogosService;
     @Value("${token.api-megasena}")
     private String tokenApi;
     @Value("${url.api-loteria}")
@@ -38,21 +40,25 @@ public class ResultadoService {
         ResultadoDto resultado = new ResultadoDto();
         String loteria = "megasena";
         resultado = feingRepository.buscarResultado(loteria, tokenApi);
-        log.info("resultado: ", resultado.getDezenas());
-        System.out.println(resultado);
+        //atualiza o numero do concurso para salvar um novo jogo
+        jogosService.pegarCodigoSorteio();
 
         List<Resultado> resultadoListBanco = buscarTodos();
         ResultadoDto finalResultado = resultado;
+
         if(Objects.isNull(resultadoListBanco)){
             resultadoRepository.save(resultado.pegarModel());
+            log.info("Concurso: {} salvo ", resultado.getNumeroConcurso());
         }
         else{
             resultadoListBanco.stream().forEach(resultadoBanco -> {
-                if(finalResultado.getNumeroConcurso() == resultadoBanco.getNumeroConcurso()){
-                    throw new RuntimeException("Concurso existente");
+                if(finalResultado.getNumeroConcurso().equals(resultadoBanco.getNumeroConcurso())){
+                    log.warn("Numero do concurso existente");
+                    throw new NumberException("Concurso existente");
                 }
             });
             resultadoRepository.save(resultado.pegarModel());
+            log.info("Concurso: {} salvo ", resultado.getNumeroConcurso());
         }
 
     }

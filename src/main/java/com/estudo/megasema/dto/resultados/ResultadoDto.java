@@ -22,7 +22,7 @@ import java.util.List;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class ResultadoDto implements Serializable {
     private String nome;
-    private int numeroConcurso;
+    private Long numeroConcurso;
     private String dataConcurso;
     private Boolean acumulou;
     private BigDecimal valorAcumulado;

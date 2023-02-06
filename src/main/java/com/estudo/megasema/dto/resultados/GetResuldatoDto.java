@@ -10,7 +10,7 @@ import java.util.List;
 public class GetResuldatoDto {
     private Long id;
     private String nome;
-    private int numeroConcurso;
+    private Long numeroConcurso;
     private String dataConcurso;
     private Boolean acumulou;
     private BigDecimal valorAcumulado;
