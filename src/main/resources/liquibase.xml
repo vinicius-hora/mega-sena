@@ -27,21 +27,21 @@
 
     <changeSet id="ms-tb-02" author="Vinicius Bastos">
         <createTable tableName="JOGOS">
-            <column autoIncrement="true" name="id" type="BIGINT">
+            <column autoIncrement="true" name="id" type="bigserial">
                 <constraints primaryKey="true"/>
             </column>
             <column name="nome" type="VARCHAR(255)">
             </column>
             <column name="email" type="VARCHAR(255)">
             </column>
-            <column name="numeros" type="VARCHAR(255)" >
+            <column name="numeros" type="_varchar" >
             </column>
-            <column name="codigo_sorteio" type="INTEGER" >
+            <column name="codigo_sorteio" type="numeric" >
             </column>
             <column name="data_do_jogo" type="timestamp">
             </column>
             <column name="dezenas" type="VARCHAR(255)"/>
-            <column name="arrecadacao_total" type="DECIMAL"/>
+            <column name="arrecadacao_total" type="numeric"/>
         </createTable>
     </changeSet>
 

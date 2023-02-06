@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -26,11 +27,13 @@ public class Jogos implements Serializable {
     @Column(name = "email")
     private String email;
     @Column(name = "numeros")
-    private String numeros;
+    private List<String> numeros;
     @Column(name = "codigo_de_sorteio")
     private Long codigoDeSorteio;
     @Column(name = "data_do_jogo")
     private LocalDateTime dataDoJogo;
+    @Column(name = "cidade")
+    private String cidade;
 
     @Override
     public boolean equals(Object o) {

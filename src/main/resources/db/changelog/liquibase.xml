@@ -45,5 +45,11 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="ms-tb-02" author="Vinicius Bastos">
+        <addColumn tableName="JOGOS">
+            <column name="cidade" type="TEXT"></column>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>
 

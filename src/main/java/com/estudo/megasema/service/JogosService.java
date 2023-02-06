@@ -1,5 +1,6 @@
 package com.estudo.megasema.service;
 
+import com.estudo.megasema.dto.jogos.GetJogosDto;
 import com.estudo.megasema.dto.jogos.JogoAleatorioDto;
 import com.estudo.megasema.dto.jogos.JogosDto;
 import com.estudo.megasema.model.Jogos;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -63,18 +65,35 @@ public class JogosService {
         var data = LocalDateTime.now().atZone(ZoneOffset.UTC);
         Jogos jogos = new Jogos();
 
+        if(Boolean.FALSE.equals(verificarNumeros(jogosDto.getNumeros()))){
+            throw new RuntimeException(" Dezenas informadas diferente de 6 ou maior que 60");
+        }
+
         jogos.setDataDoJogo(data.toLocalDateTime());
         jogos.setNumeros(jogosDto.getNumeros());
         jogos.setNome(jogosDto.getNome());
         jogos.setEmail(jogosDto.getEmail());
         jogos.setCodigoDeSorteio(jogosDto.getCodigoDeSorteio());
+        jogos.setCidade(jogosDto.getCidade());
         jogosRepository.save(jogos);
         log.info("jogo salvo no banco");
     }
 
-    public List<JogosDto> listarTodos() {
+    private boolean verificarNumeros(List<String> numeros) {
+        if(numeros.size() == 6){
+            for(String n:numeros){
+                if(Long.valueOf(n) > 60){
+                    return false;
+                }
+            }
+           return true;
+        }
+        return false;
+    }
+
+    public List<GetJogosDto> listarTodos() {
         var jogos = jogosRepository.findAll();
         log.info("listando todos os jogos");
-        return jogos.stream().map(JogosDto::getDto).collect(Collectors.toList());
+        return jogos.stream().map(GetJogosDto::getDto).collect(Collectors.toList());
     }
 }

@@ -9,6 +9,7 @@ import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -23,14 +24,15 @@ import java.util.stream.Collectors;
 @EnableScheduling
 public class ResultadoService {
     private final ResultadoFeingRepository feingRepository;
-    private static final String CRON_GENERATE = "0 * * * * *";
+    private static final String CRON_GENERATE = "0 0 21 * * 3,6";
 //    MINUTO = 0 * * * * *
-//    QUARTA E SABADO 21H = 0 0 21 * * 3,6"
+//    QUARTA E SABADO 21H = "0 0 21 * * 3,6"
     private final ResultadoRepository resultadoRepository;
     @Value("${token.api-megasena}")
     private String tokenApi;
     @Value("${url.api-loteria}")
     private String urlApi;
+    @Async
     @Scheduled(cron = CRON_GENERATE)
     public void salvarResultado(){
         ResultadoDto resultado = new ResultadoDto();

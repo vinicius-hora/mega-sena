@@ -2,22 +2,22 @@ server:
   port: 4001
 spring:
   profiles:
-    active: test
+    active: ${PROFILE:dev}
 ---
-#configura��o de versionamento
-spring:
-  liquibase:
-    enabled: true  # false or true
-    change-log: classpath:liquibase.xml
-#    main:
-#      allow-bean-definition-overriding: true
+##configura��o de versionamento
+#spring:
+#  liquibase:
+#    enabled: true  # false or true
+#    change-log: classpath:liquibase.xml
+##    main:
+##      allow-bean-definition-overriding: true
 
 #variaveis de ambiente
 token:
   api-megasena: ${API_MEGASEMA}
 
 url:
-  api-loteria: ${URL-API-MEGASENA:https://apiloterias.com.br/app/}
+  api-loteria: ${URL_API_MEGASENA:https://apiloterias.com.br/app/}
 #
 #log FeignClient
 logging.level.com.estudo.megasena.repository.*: DEBUG
