@@ -1,5 +1,5 @@
 server:
-  port: 4003
+  port: ${SERVER_PORT:4003}
 spring:
   profiles:
     active: ${PROFILE:dev}
