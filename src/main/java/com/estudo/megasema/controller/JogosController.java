@@ -1,5 +1,6 @@
 package com.estudo.megasema.controller;
 
+import com.estudo.megasema.dto.jogos.GetJogosDto;
 import com.estudo.megasema.dto.jogos.JogosDto;
 import com.estudo.megasema.service.JogosService;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ public class JogosController {
     private final JogosService jogosService;
 
     @GetMapping()
-    public ResponseEntity<List<JogosDto>> listarTodos(){
+    public ResponseEntity<List<GetJogosDto>> listarTodos(){
         var jogos = jogosService.listarTodos();
 
         return new ResponseEntity<>(jogos, HttpStatus.OK);
