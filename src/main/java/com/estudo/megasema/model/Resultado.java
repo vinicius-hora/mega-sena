@@ -22,7 +22,7 @@ public class Resultado  implements Serializable {
     @Column(name = "nome")
     private String nome;
     @Column(name = "numero_concurso")
-    private int numeroConcurso;
+    private Long numeroConcurso;
     @Column(name = "data_concurso")
     private String dataConcurso;
     @Column(name = "acumulou")
