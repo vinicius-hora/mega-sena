@@ -14,7 +14,7 @@ spring:
 
 #variaveis de ambiente
 token:
-  api-megasena: ${API_MEGASEMA}
+  api-megasena: ${API_MEGASENA}
 
 url:
   api-loteria: ${URL_API_MEGASENA:https://apiloterias.com.br/app/}
