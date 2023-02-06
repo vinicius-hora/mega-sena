@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 public class JogosService {
     private static final int NUMERO_FINAL = 60;
 
-    private static Long CODIGO_SORTEIO;
+    private static Long CODIGO_SORTEIO = 0L;
     private final JogosRepository jogosRepository;
     private String loteria = "megasena";
     @Value("${token.api-megasena}")
