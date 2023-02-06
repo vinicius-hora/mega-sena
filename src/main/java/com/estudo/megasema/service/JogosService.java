@@ -37,7 +37,6 @@ public class JogosService {
     private static final int NOVE_HORAS_PM = 21;
     private final ResultadoFeingRepository feingRepository;
 
-    @PostConstruct
     public void pegarCodigoSorteio(){
         ResultadoDto resultado = feingRepository.buscarResultado(loteria,tokenApi);
         CODIGO_SORTEIO = resultado.getNumeroConcurso() + 1;
@@ -87,6 +86,9 @@ public class JogosService {
 
         if(Boolean.FALSE.equals(verificarNumeros(jogosDto.getNumeros()))){
             throw new RuntimeException(" Dezenas informadas diferente de 6 ou maior que 60");
+        }
+        if (CODIGO_SORTEIO.longValue() == 0){
+            pegarCodigoSorteio();
         }
 
         jogos.setDataDoJogo(data.toLocalDateTime());
