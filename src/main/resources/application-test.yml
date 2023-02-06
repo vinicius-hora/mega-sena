@@ -8,6 +8,15 @@ spring:
     driver-class-name: org.postgresql.Driver
 
 ---
+#configura��o de versionamento
+spring:
+  liquibase:
+    enabled: true  # false or true
+    change-log: classpath:liquibase.xml
+#    main:
+#      allow-bean-definition-overriding: true
+
+---
 #jpa
 spring:
   jpa:

@@ -1,0 +1,16 @@
+version: "3"
+services:
+  mega-sena:
+    image: viniciushora/megasena:latest
+    ports:
+      - "4001:4001"
+    environment:
+#      profile dev -> banco h2 , test -> banco postgres
+      PROFILE: dev
+      API_MEGASEMA: ${API_MEGASENA}
+      URL_API_MEGASENA: https://apiloterias.com.br/app
+      TZ: America/Sao_Paulo
+#        banco postgres
+      DB_URL:
+      DB_USERNAME:
+      DB_PASSWORD:

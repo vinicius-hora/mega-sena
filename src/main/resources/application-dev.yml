@@ -9,6 +9,14 @@ spring:
     console:
       enabled: true
 ---
+#configura��o de versionamento
+spring:
+  liquibase:
+    enabled: false  # false or true
+    change-log: classpath:liquibase.xml
+#    main:
+#      allow-bean-definition-overriding: true
+---
 #jpa
 spring:
   jpa:
