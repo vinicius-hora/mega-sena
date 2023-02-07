@@ -35,8 +35,12 @@ public class JogosService {
 
     private static final int OITO_HORAS_PM = 20;
     private static final int NOVE_HORAS_PM = 21;
+    private static final String QUARTA = "Wednesday";
+    private static final String SABADO = "Saturday";
+
     private final ResultadoFeingRepository feingRepository;
 
+    @PostConstruct
     public void pegarCodigoSorteio(){
         ResultadoDto resultado = feingRepository.buscarResultado(loteria,tokenApi);
         CODIGO_SORTEIO = resultado.getNumeroConcurso() + 1;
@@ -87,9 +91,6 @@ public class JogosService {
         if(Boolean.FALSE.equals(verificarNumeros(jogosDto.getNumeros()))){
             throw new RuntimeException(" Dezenas informadas diferente de 6 ou maior que 60");
         }
-        if (CODIGO_SORTEIO.longValue() == 0){
-            pegarCodigoSorteio();
-        }
 
         jogos.setDataDoJogo(data.toLocalDateTime());
         jogos.setNumeros(jogosDto.getNumeros());
@@ -103,11 +104,13 @@ public class JogosService {
 
     private Boolean verificarHora(ZonedDateTime data) {
 
-        Long horaAtual = (long) data.getHour();
-
-        if (data.getHour() >= OITO_HORAS_PM && horaAtual < NOVE_HORAS_PM){
-            return true;
+        if(data.getDayOfWeek().name().toUpperCase().equals(SABADO.toUpperCase()) || data.getDayOfWeek().name().toUpperCase().equals(QUARTA.toUpperCase())){
+            if (data.getHour() >= OITO_HORAS_PM && data.getHour() < NOVE_HORAS_PM){
+                return true;
+            }
+            return false;
         }
+
         return false;
     }
 
