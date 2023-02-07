@@ -1,7 +1,7 @@
 version: "3"
 services:
   mega-sena:
-    image: viniciushora/megasena:teste
+    image: viniciushora/megasena:latest
     ports:
       - "4001:4001"
     environment:
