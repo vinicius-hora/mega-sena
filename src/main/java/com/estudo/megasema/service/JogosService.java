@@ -11,6 +11,8 @@ import com.estudo.megasema.repository.feingRepository.ResultadoFeingRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -38,9 +40,10 @@ public class JogosService {
     private static final String QUARTA = "Wednesday";
     private static final String SABADO = "Saturday";
 
+//    @Qualifier("com.estudo.megasema.repository.feingRepository.ResultadoFeingRepository")
     private final ResultadoFeingRepository feingRepository;
 
-    @PostConstruct
+//    @PostConstruct
     public void pegarCodigoSorteio(){
         ResultadoDto resultado = feingRepository.buscarResultado(loteria,tokenApi);
         CODIGO_SORTEIO = resultado.getNumeroConcurso() + 1;
