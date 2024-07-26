@@ -45,8 +45,13 @@ public class JogosService {
 
 //    @PostConstruct
     public void pegarCodigoSorteio(){
-        ResultadoDto resultado = feingRepository.buscarResultado(loteria,tokenApi);
-        CODIGO_SORTEIO = resultado.getNumeroConcurso() + 1;
+        try{
+            ResultadoDto resultado = feingRepository.buscarResultado(loteria,tokenApi);
+            CODIGO_SORTEIO = resultado.getNumeroConcurso() + 1;
+        }catch (Exception e ){
+            throw new RuntimeException("Erro ao pesquisar na api: " + e.getMessage());
+        }
+
     }
 
     public JogoAleatorioDto gerarNumeroAleatorio() {

@@ -14,10 +14,15 @@ spring:
 
 #variaveis de ambiente
 token:
-  api-megasena: ${API_MEGASENA:teste}
+  api-megasena: ${TOKEN_API:DSvG4WoZGYuqKER}
 
 url:
   api-loteria: ${URL_API_MEGASENA:https://apiloterias.com.br/app/}
+  # variaveis
+config:
+  openapi:
+    dev-url: ${DEV_URL:""}
+    prod-url: ${PROD_URL:""}
 #
 #log FeignClient
 logging.level.com.estudo.megasena.repository.*: DEBUG
@@ -36,3 +41,16 @@ spring:
 #              - com.example.BarCapability
 #            queryMapEncoder: com.example.SimpleQueryMapEncoder
 #            micrometer.enabled: false
+
+---
+#swagger
+springdoc:
+  api-docs:
+    path: /api-docs
+  packages-to-scan: com.estudo.megasema
+  swagger-ui:
+    path: /documentation
+    tryItOutEnabled: true
+    operationsSorte: method
+    tagsSorter: alpha
+    filter: true

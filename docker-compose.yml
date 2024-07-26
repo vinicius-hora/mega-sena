@@ -1,17 +1,20 @@
 version: "3"
 services:
   mega-sena:
-    image: viniciushora/megasena:latest
+    build:
+      context: .
     ports:
       - "4001:4001"
     environment:
 #      profile dev -> banco h2 , test -> banco postgres
       PROFILE: dev
       SERVER_PORT: 4001
-      API_MEGASENA: ${API_MEGASENA}
+      TOKEN_API: "token"
       URL_API_MEGASENA: https://apiloterias.com.br/app
       TZ: America/Sao_Paulo
 #        banco postgres
-      DB_URL:
-      DB_USERNAME:
-      DB_PASSWORD:
+      DB_URL: "jdbc:postgresql://localhost:5432/doacoes"
+      DB_USERNAME: "postgres"
+      DB_PASSWORD: "postgres"
+      DEV_URL: ""
+      PROD_URL: ""

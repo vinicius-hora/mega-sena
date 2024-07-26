@@ -34,33 +34,39 @@ public class ResultadoService {
     private String tokenApi;
     @Value("${url.api-loteria}")
     private String urlApi;
+
     @Async
     @Scheduled(cron = CRON_GENERATE)
-    public void salvarResultado(){
-        ResultadoDto resultado = new ResultadoDto();
-        String loteria = "megasena";
-        resultado = feingRepository.buscarResultado(loteria, tokenApi);
-        //atualiza o numero do concurso para salvar um novo jogo
-        jogosService.pegarCodigoSorteio();
+    public void salvarResultado() {
+        try {
 
-        List<Resultado> resultadoListBanco = buscarTodos();
-        ResultadoDto finalResultado = resultado;
 
-        if(Objects.isNull(resultadoListBanco)){
-            resultadoRepository.save(resultado.pegarModel());
-            log.info("Concurso: {} salvo ", resultado.getNumeroConcurso());
+            ResultadoDto resultado = new ResultadoDto();
+            String loteria = "megasena";
+            resultado = feingRepository.buscarResultado(loteria, tokenApi);
+            //atualiza o numero do concurso para salvar um novo jogo
+            jogosService.pegarCodigoSorteio();
+
+            List<Resultado> resultadoListBanco = buscarTodos();
+            ResultadoDto finalResultado = resultado;
+
+            if (Objects.isNull(resultadoListBanco)) {
+                resultadoRepository.save(resultado.pegarModel());
+                log.info("Concurso: {} salvo ", resultado.getNumeroConcurso());
+            } else {
+                resultadoListBanco.stream().forEach(resultadoBanco -> {
+                    if (finalResultado.getNumeroConcurso().equals(resultadoBanco.getNumeroConcurso())) {
+                        log.warn("Numero do concurso existente");
+                        throw new NumberException("Concurso existente");
+                    }
+                });
+                resultadoRepository.save(resultado.pegarModel());
+                log.info("Concurso: {} salvo ", resultado.getNumeroConcurso());
+            }
+
+        } catch (Exception e) {
+            log.error("Erro ao pesquisar na api: " + e.getMessage());
         }
-        else{
-            resultadoListBanco.stream().forEach(resultadoBanco -> {
-                if(finalResultado.getNumeroConcurso().equals(resultadoBanco.getNumeroConcurso())){
-                    log.warn("Numero do concurso existente");
-                    throw new NumberException("Concurso existente");
-                }
-            });
-            resultadoRepository.save(resultado.pegarModel());
-            log.info("Concurso: {} salvo ", resultado.getNumeroConcurso());
-        }
-
     }
 
     private List<Resultado> buscarTodos(){
